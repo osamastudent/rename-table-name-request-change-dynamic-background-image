@@ -1,0 +1,112 @@
+**************rename single column****************
+
+php artisan make:migration rename_title_in_mypages
+
+
+    public function up()
+    {
+        Schema::table('mypages', function (Blueprint $table) {
+        $table->renameColumn('changetitle','title');
+<!--        $table->renameColumn('oldname','newname'); -->
+
+        });
+
+
+  public function down()
+    {
+        Schema::table('mypages', function (Blueprint $table) {
+            $table->renameColumn('title','changetitle');
+<!--        $table->renameColumn('newname','oldname'); -->
+        });
+  
+*****************************table name****************************
+php artisan make:migration rename_mypages_table   
+
+ public function up()
+    {
+        Schema::rename('mypages', 'pages');
+        Schema::rename('oldtablename', 'newtablename');
+    }
+
+
+
+****************change multiple column*********************
+php artisan make:migration change_column_in_pages
+
+ public function up()
+    {
+        Schema::table('pages', function (Blueprint $table) {
+            
+            $table->renameColumn('title', 'changed1');
+            $table->renameColumn('changecontent', 'changecontentchanges');
+            
+        });
+
+
+
+
+  public function down()
+    {
+        Schema::table('pages', function (Blueprint $table) {
+            $table->renameColumn('changed1','title');
+            $table->renameColumn('changecontentchanges','changecontent');
+        });
+
+****************add multiple column*************
+php artisan make:migration add_multiple_column_to_pages
+
+
+public function up()
+    {
+        Schema::table('pages', function (Blueprint $table) {
+            $table->string('country')->after('changecontentchanges');
+            $table->string('state')->after('country');
+            $table->string('city')->after('state');
+            $table->text('desc')->after('city');
+        });
+    }
+
+
+
+public function down()
+    {
+        Schema::table('pages', function (Blueprint $table) {
+            $table->dropColumn('country');
+            $table->dropColumn('state');
+            $table->dropColumn('city');
+            $table->dropColumn('desc');
+        });
+}
+
+
+*****************drop multiple colum***********
+
+php artisan make:migration drop_column_from_pages
+php artisan make:migration drop_multiple_column_from_pages
+
+public function up()
+    {
+        Schema::table('pages', function (Blueprint $table) {
+            $table->dropColumn('country');
+            $table->dropColumn('state');
+            $table->dropColumn('city');
+            $table->dropColumn('desc');
+        });
+    }
+**********************nav link******************
+{{Request::is('users') ?'active' : ''}}
+*******************change background image dynamic*******************
+<style>
+        .takingtrad-container .takingtradeslider{
+            background-image: url({{ asset('membersbackgroundimage/'.$takingtrade->backgroundimage) }});
+       
+    background-size: 100% 100%;
+    height: 400px;
+    background-position: center;
+    background-attachment: fixed;
+color:white;
+display: flex;
+justify-content: center;
+align-items: center;
+} 
+    </style>
